@@ -13,11 +13,12 @@ export const RatingScale: React.FC<RatingScaleProps> = ({
   disabled,
 }) => {
   return (
-    <div className="flex flex-col items-center gap-4 p-4">
+    <div className="flex flex-col items-center gap-4 p-0">
       <label className="text-lg font-medium text-gray-700">
-        Rate this video (1-5)
+        Q: To what degree do you think the dance fit to the music ?
       </label>
-      <div className="flex gap-4">
+      <div className="flex gap-10 items-center">
+        <span className="text-md text-gray-500">Low</span>
         {[1, 2, 3, 4, 5].map((rating) => (
           <button
             key={rating}
@@ -38,10 +39,7 @@ export const RatingScale: React.FC<RatingScaleProps> = ({
             {rating}
           </button>
         ))}
-      </div>
-      <div className="flex justify-between w-full max-w-xs text-sm text-gray-500 px-1">
-        <span>Low</span>
-        <span>High</span>
+        <span className="text-md text-gray-500">High</span>
       </div>
     </div>
   );
