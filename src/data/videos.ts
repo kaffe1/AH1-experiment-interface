@@ -5,10 +5,19 @@ export interface VideoStimulus {
 }
 
 // Generate 64 mock videos
+const videoSrc = [
+  "public/video/demo_video1-1.mp4",
+  "public/video/demo_video2-1.mp4",
+  "public/video/demo_video3-1.mp4",
+  "public/video/demo_video4-1.mp4",
+  "public/video/demo_video4-1.mp4",
+];
+const shuffledVideos = [...videoSrc].sort(() => Math.random() - 0.5);
 export const videos: VideoStimulus[] = Array.from({ length: 5 }, (_, i) => ({
   id: `video-${i + 1}`,
   // Using a sample video from MDN for demonstration purposes
   // In a real app, these would be different URLs
-  url: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+
+  url: shuffledVideos[i],
   duration: 15,
 }));

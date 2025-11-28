@@ -110,8 +110,9 @@ function App() {
       </header> */}
 
       {/* Main Content */}
-      <main className="flex-1 flex items-center justify-center p-4">
+      <main className=" flex-1 flex items-center justify-center p-4">
         <StimulusPlayer
+          videoLength={videos.length}
           video={videos[currentIndex]}
           currentRating={ratings[videos[currentIndex].id] || null}
           onRate={handleRate}
@@ -126,7 +127,14 @@ function App() {
       </main>
 
       {/* Break Overlay */}
-      {isPaused && <BreakOverlay onResume={() => setIsPaused(false)} />}
+      {isPaused && (
+        <BreakOverlay
+          onResume={() => {
+            setIsPaused(false);
+            handleNext();
+          }}
+        />
+      )}
     </div>
   );
 }
