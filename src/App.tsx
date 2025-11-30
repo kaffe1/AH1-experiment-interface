@@ -3,7 +3,8 @@ import { videos } from "./data/videos";
 import { StimulusPlayer } from "./components/StimulusPlayer";
 import { BreakOverlay } from "./components/BreakOverlay";
 import { CheckCircle, Database } from "lucide-react";
-
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "./firebase"
 function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [ratings, setRatings] = useState<Record<string, number>>({});
@@ -51,17 +52,39 @@ function App() {
     }
   };
 
-  const finishExperiment = () => {
-    setIsFinished(true);
-    // Simulate sending data to database
-    console.log("Sending data to database:", {
-      ratings,
-      completedAt: new Date().toISOString(),
-    });
-    // Clear local storage after successful completion (simulated)
-    localStorage.removeItem("experiment_ratings");
-    localStorage.removeItem("experiment_index");
+  // const finishExperiment = () => {
+  //   setIsFinished(true);
+  //   // Simulate sending data to database
+  //   console.log("Sending data to database:", {
+  //     ratings,
+  //     completedAt: new Date().toISOString(),
+  //   });
+  //   // Clear local storage after successful completion (simulated)
+  //   localStorage.removeItem("experiment_ratings");
+  //   localStorage.removeItem("experiment_index");
+  // };
+  const finishExperiment = async () => {
+  setIsFinished(true);
+
+  // create the data object you want to store
+  const data = {
+    ratings, // your { "video-1": 4, ... } object
+    completedAt: new Date().toISOString(),
   };
+
+  try {
+    // save a new document in a collection called "sessions" (name is up to you)
+    await addDoc(collection(db, "sessions"), data);
+    console.log("Saved to Firestore:", data);
+  } catch (error) {
+    console.error("Error saving to Firestore:", error);
+  }
+
+  // clear local storage after saving
+  localStorage.removeItem("experiment_ratings");
+  localStorage.removeItem("experiment_index");
+};
+
 
   if (isFinished) {
     return (
