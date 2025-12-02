@@ -36,7 +36,7 @@ async function exportSessions() {
   // export Excel
   XLSX.writeFile(workbook, "sessions.xlsx");
 
-  console.log("✅ 导出完成：sessions.xlsx");
+  console.log("export successfully sessions.xlsx");
 }
 
 exportSessions();

@@ -20,11 +20,10 @@ export const BreakOverlay: React.FC<BreakOverlayProps> = ({ onResume }) => {
       {/* Content Overlay */}
       <div className="relative z-10 flex flex-col items-center justify-center p-8 bg-white/20 backdrop-blur-md rounded-2xl shadow-2xl border border-white/30 max-w-md text-center">
         <h2 className="text-3xl font-bold text-white mb-4 drop-shadow-md">
-          Take a Deep Breath
+          Take a Break 😊
         </h2>
         <p className="text-white/90 mb-8 text-lg drop-shadow-sm">
-          Relax and clear your mind. When you are ready to continue the
-          experiment, press the button below.
+          When you are ready to continue the experiment, press the button below.
         </p>
 
         <button

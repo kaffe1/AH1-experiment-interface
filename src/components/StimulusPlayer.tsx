@@ -52,6 +52,7 @@ export const StimulusPlayer: React.FC<StimulusPlayerProps> = ({
       videoRef.current.currentTime = 0;
       videoRef.current.play().catch(() => setIsPlaying(false));
     }
+    console.log(video.id);
   }, [video.id]);
 
   const handleTimeUpdate = () => {
@@ -61,7 +62,7 @@ export const StimulusPlayer: React.FC<StimulusPlayerProps> = ({
       const percent = Math.min((current / duration) * 100, 100);
       setProgress(percent);
 
-      console.log("current", current, duration);
+      // console.log("current", current, duration);
       if (current >= duration) {
         videoRef.current.pause();
         setHasEnded(true);
@@ -198,7 +199,7 @@ export const StimulusPlayer: React.FC<StimulusPlayerProps> = ({
           {/* next button */}
           <button
             onClick={() => {
-              if (currentIndex === Math.floor(videoLength / 2)) {
+              if (currentIndex === Math.floor(videoLength / 2 - 1)) {
                 videoRef.current?.pause();
                 onBreak();
               } else {
@@ -216,7 +217,7 @@ export const StimulusPlayer: React.FC<StimulusPlayerProps> = ({
             Next
             <ChevronRight className="w-5 h-5" />
           </button>
-          {currentIndex === Math.floor(videoLength / 2) && (
+          {currentIndex === Math.floor(videoLength / 2 - 1) && (
             <div className="break-notification absolute w-full pr-12 text-center pointer-events-none">
               after this video stimuli, you will have a 1-2min break
             </div>
