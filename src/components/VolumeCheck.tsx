@@ -27,8 +27,8 @@ export const VolumeCheck: React.FC<VolumeCheckProps> = ({
 
   return (
     <div
-      className="volume-check-container flex flex-col gap-5 items-center text-center"
-      style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}
+      className="volume-check-container flex flex-col gap-5 items-center text-center mt-6 mx-auto"
+      style={{ padding: "20px", maxWidth: "600px" }}
     >
       {/* 1. Welcome Info */}
       <div className="welcome-info bg-gray-100 rounded-xl py-6 px-8">
