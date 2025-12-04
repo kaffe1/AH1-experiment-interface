@@ -21,6 +21,7 @@ interface StimulusPlayerProps {
   isLast: boolean;
   totalVideos: number;
   currentIndex: number;
+  volume: number;
 }
 
 export const StimulusPlayer: React.FC<StimulusPlayerProps> = ({
@@ -35,6 +36,7 @@ export const StimulusPlayer: React.FC<StimulusPlayerProps> = ({
   isLast,
   totalVideos,
   currentIndex,
+  volume,
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -54,6 +56,12 @@ export const StimulusPlayer: React.FC<StimulusPlayerProps> = ({
     }
     console.log(video.id);
   }, [video.id]);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.volume = volume;
+    }
+  }, [volume]);
 
   const handleTimeUpdate = () => {
     if (videoRef.current) {

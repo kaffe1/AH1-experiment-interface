@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { videos } from "./data/videos";
 import { StimulusPlayer } from "./components/StimulusPlayer";
 import { BreakOverlay } from "./components/BreakOverlay";
+import { VolumeCheck } from "./components/VolumeCheck";
 import { CheckCircle, Database } from "lucide-react";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "./firebase";
@@ -10,6 +11,8 @@ function App() {
   const [ratings, setRatings] = useState<Record<string, number>>({});
   const [isPaused, setIsPaused] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
+  const [isStarted, setIsStarted] = useState(false);
+  const [volume, setVolume] = useState(0.5);
 
   // Load state from localStorage on mount
   useEffect(() => {
@@ -85,6 +88,15 @@ function App() {
     localStorage.removeItem("experiment_index");
   };
 
+  if (!isStarted) {
+    return (
+      <VolumeCheck
+        setIsStarted={setIsStarted}
+        volume={volume}
+        setVolume={setVolume}
+      />
+    );
+  }
   if (isFinished) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
@@ -142,6 +154,7 @@ function App() {
           isLast={currentIndex === videos.length - 1}
           totalVideos={videos.length}
           currentIndex={currentIndex}
+          volume={volume}
         />
       </main>
 
